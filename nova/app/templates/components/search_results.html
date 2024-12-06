@@ -1,0 +1,58 @@
+<div class="search-results">
+    {% if results %}
+        <div class="results-meta">
+            <div class="results-stats">
+                <span class="material-icons">analytics</span>
+                {{ total_results }} results ({{ time_taken|round(3) }} seconds)
+            </div>
+            <div class="results-filters">
+                <button class="filter-button active">All</button>
+                <button class="filter-button">Images</button>
+                <button class="filter-button">Videos</button>
+                <button class="filter-button">News</button>
+            </div>
+        </div>
+        
+        <div class="results-list">
+            {% for result in results %}
+            <article class="result-item animate-fade-in" style="animation-delay: {{ loop.index0 * 0.1 }}s">
+                <div class="result-meta">
+                    <img src="{{ result.favicon }}" alt="" class="result-favicon">
+                    <span class="result-domain">{{ result.domain }}</span>
+                </div>
+                <h3 class="result-title">
+                    <a href="{{ result.url }}" class="result-link">{{ result.title|safe }}</a>
+                </h3>
+                <p class="result-url">
+                    <span class="material-icons">link</span>
+                    {{ result.url }}
+                </p>
+                <p class="result-snippet">{{ result.content|safe }}</p>
+                <div class="result-actions">
+                    <button class="action-button">
+                        <span class="material-icons">share</span>
+                        Share
+                    </button>
+                    <button class="action-button">
+                        <span class="material-icons">more_vert</span>
+                        More
+                    </button>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="no-results animate-fade-in">
+            <span class="material-icons">search_off</span>
+            <p>No results found for "{{ query }}"</p>
+            <div class="search-suggestions">
+                <h4>Suggestions:</h4>
+                <ul>
+                    <li>Check your spelling</li>
+                    <li>Try different keywords</li>
+                    <li>Use more general terms</li>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+</div>

@@ -1,0 +1,14 @@
+{% extends "layouts/main.html" %}
+
+{% block title %}{{ query }} - Nova Search{% endblock %}
+
+{% block content %}
+<div class="search-page">
+    <div class="search-header">
+        {% include "components/search_box.html" %}
+    </div>
+
+    {% include "components/search_results.html" %}
+    {% include "components/pagination.html" %}
+</div>
+{% endblock %}

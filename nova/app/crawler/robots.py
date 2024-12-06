@@ -6,15 +6,16 @@ import logging
 from typing import Dict
 import time
 import redis
-from app.core.config import REDIS_URL
+from nova.app.core.config import settings
 
 class RobotsParser:
     def __init__(self):
         self.parsers: Dict[str, urllib.robotparser.RobotFileParser] = {}
         self.cache_time = 3600  # Cache robots.txt for 1 hour
         self.last_checked = {}
-        self.redis_client = redis.from_url(REDIS_URL)
+        self.redis_client = redis.from_url(settings.REDIS_URL)  # Use settings.REDIS_URL
         self.session = None
+
 
     async def init_session(self):
         if not self.session:

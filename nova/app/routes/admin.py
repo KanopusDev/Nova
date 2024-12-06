@@ -2,25 +2,26 @@
 from fastapi import APIRouter, Depends, HTTPException
 from typing import List
 from pydantic import BaseModel
-from app.core.auth import verify_admin_token
-from app.search.engine import SearchEngine
-from app.crawler.manager import CrawlerManager
+from nova.app.core.auth import verify_admin_token
+from nova.app.search.engine import SearchEngine
+from nova.app.crawler.manager import CrawlerManager
 
 router = APIRouter(prefix="/api/admin", dependencies=[Depends(verify_admin_token)])
+search_engine = SearchEngine()
+
 
 class IndexStats(BaseModel):
     total_documents: int
     last_update: str
     storage_size: str
 
-@router.get("/stats", response_model=IndexStats)
-async def get_stats(
-    search_engine: SearchEngine = Depends(lambda: SearchEngine())
-):
-    try:
-        return await search_engine.get_stats()
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+@router.get("/stats", dependencies=[Depends(verify_admin_token)])
+async def get_stats():
+    """Get system statistics"""
+    return {
+        "total_pages": await search_engine.get_total_pages(),
+        "last_crawl": await search_engine.get_last_crawl_time()
+    }
 
 @router.post("/reindex")
 async def reindex(

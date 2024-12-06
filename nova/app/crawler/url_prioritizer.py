@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 import joblib
 import redis
-from app.core.config import REDIS_URL
+from app.core.config import settings  # Changed from REDIS_URL
 
 class URLPrioritizer:
     def __init__(self):
@@ -15,7 +15,7 @@ class URLPrioritizer:
             (r'/news/', 0.9),
             (r'/product/', 0.6)
         ]
-        self.redis_client = redis.from_url(REDIS_URL)
+        self.redis_client = redis.from_url(settings.REDIS_URL)  # Use settings.REDIS_URL
         self.model = self._load_or_create_model()
         
     def prioritize_urls(self, urls: List[str]) -> List[Dict]:

@@ -4,13 +4,13 @@ from typing import Dict, List
 import logging
 import json
 from datetime import datetime
-from app.core.config import MONGODB_URI, REDIS_URL
+from nova.app.core.config import settings
 
 class Database:
     def __init__(self):
-        self.client = AsyncIOMotorClient(MONGODB_URI)
+        self.client = AsyncIOMotorClient(settings.MONGODB_URL)  # Use settings
         self.db = self.client.nova_search
-        self.redis = redis.from_url(REDIS_URL)
+        self.redis = redis.from_url(settings.REDIS_URL)  # Use settings
         self.cache_timeout = 3600  # 1 hour
 
     async def index_page(self, page_data: Dict):

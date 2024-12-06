@@ -2,7 +2,7 @@ import asyncio
 import aiohttp
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
-from app.crawler.robots import RobotsParser
+from nova.app.crawler.robots import RobotsParser
 from datetime import datetime
 import logging
 import json
@@ -12,7 +12,7 @@ import re
 from concurrent.futures import ThreadPoolExecutor
 import nltk
 from nltk.tokenize import sent_tokenize
-from app.storage.metadata import MetadataExtractor
+from nova.app.storage.metadata import MetadataExtractor
 
 class WebCrawler:
     def __init__(self, max_pages: int = 1000, max_depth: int = 3):

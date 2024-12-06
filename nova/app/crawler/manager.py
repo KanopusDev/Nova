@@ -6,10 +6,8 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
 import aiohttp
 import logging
-from app.crawler.crawler import WebCrawler
-from app.crawler.url_prioritizer import URLPrioritizer
-from app.crawler.sitemap import SitemapParser
-from app.storage.database import Database
+from nova.app.core.config import settings
+
 
 logger = structlog.get_logger()
 PAGES_CRAWLED = Counter('pages_crawled_total', 'Total pages crawled')
@@ -17,13 +15,18 @@ CRAWL_QUEUE_SIZE = Gauge('crawl_queue_size', 'Size of crawl queue')
 
 class CrawlerManager:
     def __init__(self):
+        from nova.app.crawler.crawler import WebCrawler
+        from nova.app.crawler.url_prioritizer import URLPrioritizer
+        from nova.app.crawler.sitemap import SitemapParser
+        from nova.app.storage.database import Database
+        
         self.crawler = WebCrawler()
         self.prioritizer = URLPrioritizer()
         self.sitemap_parser = SitemapParser()
         self.db = Database()
         self.executor = ThreadPoolExecutor(max_workers=4)
         self.queue = asyncio.Queue()
-        
+
     async def start_crawling(self, seed_urls: List[str]):
         try:
             logger.info("starting_crawl", urls=seed_urls)
@@ -51,10 +54,12 @@ class CrawlerManager:
 
         workers = [
             asyncio.create_task(self._crawler_worker())
-            for _ in range(CONFIG.CRAWLER_WORKERS)
+            for _ in range(settings.CRAWLER_WORKERS)  # Use settings instead of CONFIG
         ]
         
         await asyncio.gather(*workers)
+
+
 
     async def schedule_crawls(self):
         """Schedule periodic crawls based on site update frequency"""

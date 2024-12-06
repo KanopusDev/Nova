@@ -1,0 +1,20 @@
+{% if total_results > 0 %}
+<nav class="pagination">
+    {% set total_pages = (total_results / 10)|round(0, 'ceil')|int %}
+    
+    {% if current_page > 1 %}
+    <a href="?q={{ query }}&page={{ current_page - 1 }}" class="page-link prev">Previous</a>
+    {% endif %}
+
+    {% for p in range(max(1, current_page - 2), min(total_pages + 1, current_page + 3)) %}
+    <a 
+        href="?q={{ query }}&page={{ p }}" 
+        class="page-link {{ 'active' if p == current_page }}"
+    >{{ p }}</a>
+    {% endfor %}
+
+    {% if current_page < total_pages %}
+    <a href="?q={{ query }}&page={{ current_page + 1 }}" class="page-link next">Next</a>
+    {% endif %}
+</nav>
+{% endif %}

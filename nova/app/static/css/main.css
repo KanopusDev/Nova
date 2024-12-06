@@ -1,0 +1,375 @@
+:root {
+    --primary-color: #0077E6;
+    --primary-light: #E6F1FF;
+    --accent-color: #FF8C00;
+    --accent-light: #FFF4E6;
+    --complement-color: #008C00;
+    --text-color: #00254D;
+    --text-light: #004080;
+    --bg-color: #fff;
+    --border-color: #B3D7FF;
+}
+
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--text-color);
+    background: var(--bg-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header & Navigation */
+.header {
+    background: linear-gradient(135deg, #0077E6, #FF8C00);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0, 37, 77, 0.1);
+}
+
+.nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: opacity 0.2s;
+}
+
+.logo:hover {
+    opacity: 0.9;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+    padding: 2rem;
+}
+
+/* Home Page */
+.home {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.home-search {
+    max-width: 632px;
+    margin: 0 auto;
+}
+
+.logo-container {
+    margin-bottom: 2rem;
+}
+
+.logo-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.home-title {
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.home-subtitle {
+    color: var(--text-light);
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Search Components */
+.search-form {
+    position: relative;
+    max-width: 632px;
+    margin: 0 auto;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border: 2px solid var(--border-color);
+    border-radius: 24px;
+    background: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 119, 230, 0.1);
+}
+
+.search-box:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 20px rgba(0, 119, 230, 0.2);
+}
+
+.search-icon {
+    color: var(--text-light);
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: var(--text-color);
+    font-family: inherit;
+}
+
+.voice-search, .search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.voice-search:hover, .search-button:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+}
+
+/* Search Results */
+.search-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.search-header {
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.results-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    color: var(--text-light);
+}
+
+.results-stats {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.results-filters {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    background: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-button.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: transparent;
+}
+
+.result-item {
+    padding: 1.25rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.result-item:hover {
+    background-color: var(--primary-light);
+    border-color: var(--border-color);
+}
+
+.result-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.result-favicon {
+    width: 16px;
+    height: 16px;
+}
+
+.result-domain {
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
+.result-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.result-title a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.result-title a:hover {
+    text-decoration: underline;
+}
+
+.result-url {
+    color: #006621;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.result-snippet {
+    color: var(--text-light);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+}
+
+.result-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--text-light);
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.action-button:hover {
+    background: var(--primary-light);
+    color: var(--primary-color);
+}
+
+/* Footer */
+.footer {
+    background: var(--primary-light);
+    padding: 2rem;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .home-title {
+        font-size: 2.5rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .search-box {
+        margin: 0 1rem;
+    }
+
+    .results-meta {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .result-item {
+        padding: 1rem;
+    }
+}

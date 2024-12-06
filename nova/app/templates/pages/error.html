@@ -1,0 +1,23 @@
+{% extends "layouts/main.html" %}
+
+{% block title %}Error - Nova Search{% endblock %}
+
+{% block content %}
+<div class="error-container animate-fade-in">
+    <div class="error-content">
+        <span class="material-icons error-icon">error_outline</span>
+        <h1>Oops! Something went wrong</h1>
+        <p class="error-message">{{ error }}</p>
+        <div class="error-actions">
+            <a href="/" class="primary-button">
+                <span class="material-icons">home</span>
+                Return to Homepage
+            </a>
+            <button onclick="window.location.reload()" class="secondary-button">
+                <span class="material-icons">refresh</span>
+                Try Again
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,7 +1,10 @@
-
 import structlog
 from prometheus_client import Counter, Histogram, Gauge
 import time
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.requests import Request
+from starlette.responses import Response
+
 
 # Metrics
 SEARCH_REQUESTS = Counter('search_requests_total', 'Total search requests')
@@ -13,13 +16,19 @@ DB_CONNECTIONS = Gauge('db_connections', 'Number of database connections')
 # Structured logging
 logger = structlog.get_logger()
 
-class MetricsMiddleware:
-    async def __call__(self, request, call_next):
+
+class MetricsMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next) -> Response:
         start_time = time.time()
+        
         response = await call_next(request)
         
-        SEARCH_LATENCY.observe(time.time() - start_time)
-        SEARCH_REQUESTS.inc()
+        # Record metrics
+        request_duration = time.time() - start_time
+        SEARCH_LATENCY.observe(request_duration)
+        
+        if request.url.path.startswith("/api/v1/search"):
+            SEARCH_REQUESTS.inc()
         
         return response
 

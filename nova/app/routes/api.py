@@ -1,13 +1,16 @@
-
-from fastapi import APIRouter, HTTPException, Depends, Query
-from typing import Optional, List
+from fastapi import APIRouter, HTTPException, Query, Depends
+from typing import List, Dict, Optional
+from nova.app.search.engine import SearchEngine
+from nova.app.core.config import settings
+from nova.app.crawler.manager import CrawlerManager
 from pydantic import BaseModel, HttpUrl
-from app.search.engine import SearchEngine
-from app.crawler.manager import CrawlerManager
-from app.core.monitoring import SEARCH_REQUESTS, SEARCH_LATENCY
-import time
+from nova.app.crawler.crawler import WebCrawler
+from nova.app.search.engine import SearchEngine
 
 router = APIRouter(prefix="/api/v1")
+search_engine = SearchEngine()
+crawler = WebCrawler()
+
 
 class SearchFilters(BaseModel):
     date_from: Optional[str] = None
@@ -25,32 +28,35 @@ class CrawlRequest(BaseModel):
     urls: List[HttpUrl]
     max_depth: Optional[int] = 3
 
-@router.get("/search", response_model=SearchResponse)
+@router.get("/search")
 async def search(
-    query: str = Query(..., min_length=1),
+    q: str = Query(..., min_length=1),
     page: int = Query(1, ge=1),
-    filters: Optional[SearchFilters] = None,
-    search_engine: SearchEngine = Depends(lambda: SearchEngine())
-):
-    start_time = time.time()
+    per_page: int = Query(10, ge=1, le=100)
+) -> Dict:
+    """Search endpoint"""
     try:
-        SEARCH_REQUESTS.inc()
-        results = await search_engine.search(query, page, filters.dict() if filters else None)
-        SEARCH_LATENCY.observe(time.time() - start_time)
+        results = await search_engine.search(q, page=page, per_page=per_page)
         return results
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+async def get_crawler_manager():
+    from nova.app.crawler.manager import CrawlerManager
+    return CrawlerManager()
 
 @router.post("/crawl")
 async def start_crawl(
-    request: CrawlRequest,
-    crawler: CrawlerManager = Depends(lambda: CrawlerManager())
-):
+    urls: List[str],
+    crawler: CrawlerManager = Depends(get_crawler_manager)
+) -> Dict:
     try:
-        task_id = await crawler.start_crawling(request.urls)
-        return {"status": "started", "task_id": task_id}
+        await crawler.start_crawling(urls)
+        return {"status": "success", "message": "Crawl started"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
 
 @router.get("/crawl/{task_id}")
 async def get_crawl_status(

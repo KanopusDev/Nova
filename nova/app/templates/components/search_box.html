@@ -1,0 +1,22 @@
+<form class="search-form" action="/search" method="get">
+    <div class="search-box">
+        <span class="material-icons search-icon">search</span>
+        <input 
+            type="search" 
+            name="q" 
+            value="{{ query|default('') }}"
+            placeholder="Search the web..." 
+            autocomplete="off"
+            autofocus
+            class="search-input"
+        >
+        <button type="button" class="voice-search">
+            <span class="material-icons">mic</span>
+        </button>
+        <button type="submit" class="search-button">
+            <span class="material-icons">arrow_forward</span>
+            <span class="loading-spinner"></span>
+        </button>
+    </div>
+    <div class="search-suggestions"></div>
+</form>

@@ -14,3 +14,8 @@ torch
 sentry-sdk
 pydantic
 pydantic-settings
+structlog
+elasticsearch
+transformers
+python-jose[cryptography]
+uvicorn

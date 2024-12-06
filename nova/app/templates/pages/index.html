@@ -1,0 +1,34 @@
+{% extends "layouts/main.html" %}
+
+{% block title %}Nova Search - Web Search Engine{% endblock %}
+
+{% block content %}
+<div class="home">
+    <div class="home-search animate-fade-in">
+        <div class="logo-container">
+            <span class="material-icons logo-icon">rocket_launch</span>
+            <h1 class="home-title">Nova Search</h1>
+        </div>
+        {% include "components/search_box.html" %}
+        <p class="home-subtitle">Discover the cosmos of information</p>
+    </div>
+    
+    <div class="features">
+        <div class="feature-item">
+            <span class="material-icons">speed</span>
+            <h3>Lightning Fast</h3>
+            <p>Get instant results</p>
+        </div>
+        <div class="feature-item">
+            <span class="material-icons">security</span>
+            <h3>Secure Search</h3>
+            <p>Your privacy matters</p>
+        </div>
+        <div class="feature-item">
+            <span class="material-icons">psychology</span>
+            <h3>Smart Results</h3>
+            <p>AI-powered accuracy</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
