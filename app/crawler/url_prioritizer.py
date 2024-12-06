@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 import joblib
 import redis
-from config import REDIS_URL
+from app.core.config import REDIS_URL
 
 class URLPrioritizer:
     def __init__(self):

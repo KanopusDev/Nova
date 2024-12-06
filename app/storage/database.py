@@ -4,7 +4,7 @@ from typing import Dict, List
 import logging
 import json
 from datetime import datetime
-from config import MONGODB_URI, REDIS_URL
+from app.core.config import MONGODB_URI, REDIS_URL
 
 class Database:
     def __init__(self):

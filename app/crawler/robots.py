@@ -6,7 +6,7 @@ import logging
 from typing import Dict
 import time
 import redis
-from config import REDIS_URL
+from app.core.config import REDIS_URL
 
 class RobotsParser:
     def __init__(self):

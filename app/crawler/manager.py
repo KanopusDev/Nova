@@ -6,10 +6,10 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
 import aiohttp
 import logging
-from crawler import WebCrawler
-from url_prioritizer import URLPrioritizer
-from sitemap_parser import SitemapParser
-from database import Database
+from app.crawler.crawler import WebCrawler
+from app.crawler.url_prioritizer import URLPrioritizer
+from app.crawler.sitemap import SitemapParser
+from app.storage.database import Database
 
 logger = structlog.get_logger()
 PAGES_CRAWLED = Counter('pages_crawled_total', 'Total pages crawled')
