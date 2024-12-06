@@ -16,7 +16,7 @@ This License applies to **Nova Search Engine**, an open-source, AI-powered searc
 
 **2. Attribution Requirements:**
 - All uses of Nova Search Engine must include proper attribution to the original authors. The following notice must be prominently displayed:
-  _"Powered by Nova Search Engine, an open-source project by [Your Organization Name]."_
+  _"Powered by Nova Search Engine, an open-source project by Canopus Development & Pradyumn Tandon AKA Gamecooler19."_
 - Documentation and derivative works must maintain all original copyright notices and attributions.
 
 **3. Data Privacy and Ethics:**
