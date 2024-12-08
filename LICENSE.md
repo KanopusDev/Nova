@@ -80,7 +80,7 @@ Nova Search Engine may not be used for:
 
 ---
 
-By using Nova Search Engine, you agree to these terms and conditions. For questions or permissions, contact [Your Contact Information].
+By using Nova Search Engine, you agree to these terms and conditions. For questions or permissions, contact Gamecooler19.
 
 Copyright © 2024 Canopus Development,           
 All rights reserved.
