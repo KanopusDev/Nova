@@ -163,7 +163,7 @@ For production deployment:
 
 ## License
 
-MIT License - see LICENSE file for details
+DSOL License - see [LICENSE](LICENSE.md) file for details
 
 ## Contributing
 
