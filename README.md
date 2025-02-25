@@ -24,7 +24,7 @@ Nova is a high-performance, AI-powered search engine built with Python FastAPI. 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/Canopus-Development/nova.git
+git clone https://github.com/Kanopusdev/nova.git
 cd nova
 ```
 
@@ -163,7 +163,7 @@ For production deployment:
 
 ## License
 
-DSOL License - see [LICENSE](LICENSE.md) file for details
+MIT License - see LICENSE file for details
 
 ## Contributing
 
